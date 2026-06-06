@@ -1,0 +1,121 @@
+// Source code is decompiled from a .class file using FernFlower decompiler (from Intellij IDEA).
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class HospitalManagementSystem {
+   static ArrayList<Patient> patients = new ArrayList();
+   static Scanner sc;
+
+   public HospitalManagementSystem() {
+   }
+
+   public static void addPatient() {
+      System.out.print("Enter Patient ID: ");
+      int var0 = sc.nextInt();
+      sc.nextLine();
+      System.out.print("Enter Patient Name: ");
+      String var1 = sc.nextLine();
+      System.out.print("Enter Age: ");
+      int var2 = sc.nextInt();
+      sc.nextLine();
+      System.out.print("Enter Disease: ");
+      String var3 = sc.nextLine();
+      patients.add(new Patient(var0, var1, var2, var3));
+      System.out.println("Patient Added Successfully!");
+   }
+
+   public static void viewPatients() {
+      if (patients.isEmpty()) {
+         System.out.println("No patient records found.");
+      } else {
+         System.out.println("\n===== PATIENT RECORDS =====");
+
+         for(Patient var1 : patients) {
+            System.out.println(var1);
+         }
+
+      }
+   }
+
+   public static void searchPatient() {
+      System.out.print("Enter Patient ID to Search: ");
+      int var0 = sc.nextInt();
+
+      for(Patient var2 : patients) {
+         if (var2.patientId == var0) {
+            System.out.println("\nPatient Found:");
+            System.out.println(var2);
+            return;
+         }
+      }
+
+      System.out.println("Patient Not Found.");
+   }
+
+   public static void deletePatient() {
+      System.out.print("Enter Patient ID to Delete: ");
+      int var0 = sc.nextInt();
+
+      for(Patient var2 : patients) {
+         if (var2.patientId == var0) {
+            patients.remove(var2);
+            System.out.println("Patient Deleted Successfully!");
+            return;
+         }
+      }
+
+      System.out.println("Patient Not Found.");
+   }
+
+   public static void totalPatients() {
+      System.out.println("Total Patients: " + patients.size());
+   }
+
+   public static void main(String[] var0) {
+      while(true) {
+         System.out.println("\n==================================");
+         System.out.println("     HOSPITAL MANAGEMENT SYSTEM");
+         System.out.println("==================================");
+         System.out.println("1. Add Patient");
+         System.out.println("2. View Patients");
+         System.out.println("3. Search Patient");
+         System.out.println("4. Delete Patient");
+         System.out.println("5. Total Patients");
+         System.out.println("6. Exit");
+         System.out.println("==================================");
+         System.out.print("Choose Option: ");
+         if (!sc.hasNextInt()) {
+            System.out.println("Invalid input! Please enter a number.");
+            sc.next();
+         } else {
+            int var1 = sc.nextInt();
+            switch (var1) {
+               case 1:
+                  addPatient();
+                  break;
+               case 2:
+                  viewPatients();
+                  break;
+               case 3:
+                  searchPatient();
+                  break;
+               case 4:
+                  deletePatient();
+                  break;
+               case 5:
+                  totalPatients();
+                  break;
+               case 6:
+                  System.out.println("Thank You!");
+                  System.exit(0);
+               default:
+                  System.out.println("Invalid Choice!");
+            }
+         }
+      }
+   }
+
+   static {
+      sc = new Scanner(System.in);
+   }
+}
